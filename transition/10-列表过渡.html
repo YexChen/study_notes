@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <style>
+    .list-leave-active{
+      position : absolute
+    }
+    .list-enter{
+      opacity : 0;
+      transform : translateY(-40px);
+    }
+    .list-leave-to{
+      opacity : 0;
+      transform : translateY(40px);
+    }
+    span{
+      display : inline-block;
+      padding : 10px 20px;
+      transition : all 1s;
+    }
+  </style>
+</head>
+<body>
+  <div id = "app">
+    <button @click = "add">添加</button>
+    <button @click = "minus">删除</button>
+    <transition-group name = "list" tag = "p">
+      <span v-for = "(list,index) in lists" :key = "list">{{list}}</span>
+    </transition-group>
+  </div>
+  <script>
+    let vm = new Vue({
+      el : "#app",
+      data : {
+        lists : [1,2,3,4,5,6,7,8,9],
+        nextNum : 10
+      },
+      methods : {
+        add : function(){
+          this.lists.push(this.nextNum++)
+        },
+        minus : function(){
+          this.lists.splice(this.getRandom(),1)
+        },
+        getRandom : function(){
+          return Math.floor(Math.random()*this.lists.length)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

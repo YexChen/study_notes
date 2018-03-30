@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <style>
+    .slide-fade-enter-active{
+      transition: all .3s ease
+    }
+
+    .slide-fade-leave-active{
+      transition: all .8s cubic-bezier(.79,.33,.0051,.47)
+    }
+
+    .slide-fade-enter,.slide-fade-leave-to{
+      transform : translateX(10px);
+      opacity : 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="demo">
+    <button @click = "show = !show">点我</button>
+    <transition name = "slide-fade">
+      <p v-if = "show">你好啊</p>
+    </transition>
+  </div>
+
+  <script>
+    let vm = new Vue({
+      el : "#demo",
+      data : {
+        show : true
+      }
+    })
+  </script>
+</body>
+</html>
