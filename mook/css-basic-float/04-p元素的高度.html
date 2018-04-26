@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .p1{
+      line-height: 0px;
+      background-color: purple;
+      border-top: 1px solid purple;
+    }
+    .p2{
+      line-height: 50px;
+      background-color: purple;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <p class= "p1">文字</p>
+    <p class= "p2">文字</p>
+  </div>
+  <script>
+    /*
+    内容区域高度+行间距=行高
+    所以就会有上面这种奇怪的表现
+    行间距= line-height - font-size
+    */
+  </script>
+</body>
+</html>

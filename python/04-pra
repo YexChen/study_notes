@@ -1,0 +1,10 @@
+def createCheckerboard(numbers):
+    for i in range (numbers):
+        for j in range (numbers):
+            if(j+i)%2 != 0:
+                print 1,
+            else:
+                print 0,
+        print "\n"
+
+createCheckerboard(10)

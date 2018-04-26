@@ -1,0 +1,27 @@
+=====
+webpack学习
+这里是最简单的打包代码,把app.js打包到了bundle.js中（app.js require了其他包）
+./node_modules/.bin/webpack app.js dist/bundle.js
+
+关于webpack.config.js:
+	const path = require('path');
+
+	   module.exports = {
+	    entry: './app.js',
+	    output: {
+		path: path.join(__dirname, 'dist'),
+		filename: 'bundle.js'
+	    },
+	    mode: 'production'
+	}
+
+这上面的代码定义了入口和出口文件，可以是多个文件，mode是webpack4的模式
+
+接下来下载一下webpack-dev-server，当我们修改文件，保存的时候可以实现重新打包，并且重新刷新浏览器（热加载）
+
+webpack-dev-server不会生成实际的文件,资源存在于内存中,当浏览器发出请求的时候先从内存加载,返回打包后的资源结果
+
+###关于在webpack中使用样式
+直接在app.js中require样式文件,报错说没有loader,我们需要在webpack.config.js中配置css-loader
+
+<filtype>-loader是loader的通用形式

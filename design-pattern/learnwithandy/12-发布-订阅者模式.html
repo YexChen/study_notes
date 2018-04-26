@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h1 class = "title"></h1>
+  <p class="body"></p>
+  <script>
+    //模拟jq工具类函数
+    var $ = function(selector){
+      var el = document.querySelector(selector)
+      bindFunction(el)
+      return el
+    }
+
+    bindFunction = function(el){
+      el.html = function(content){
+        if(!content) return el.innerHTML
+        el.innerHTML = content
+        return el
+      }
+    }
+    var handler = (function(){
+      'use strict'
+      var messageCenter = {}
+
+      return{
+        //注册事件
+        regist: function(name,body){
+          if(!messageCenter[name]){
+            messageCenter[name] = body
+          }
+        },
+        //取消事件
+        cancel: function(name){
+          if(messageCenter[name]) delete messageCenter[name]
+        },
+        //触发事件
+        fire: function(name,params){
+          if(messageCenter[name]) messageCenter[name](params)
+        }
+      }
+    })()
+
+    //接受报文函数
+    handler.regist("post",function(context){
+      $(".title").html(context.title)
+      $(".body").html(context.body)
+    })
+
+    //模拟发送报文
+    handler.fire("post",{
+      title : "少年惨遭十名女老师轮",
+      body : "少年惨遭十名女老师轮流布置作业,已经切腹自尽"
+    })
+
+
+  </script>
+</body>
+</html>

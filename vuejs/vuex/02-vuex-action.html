@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="node_modules/vuex/dist/vuex.js"></script>
+</head>
+<body>
+  <div id="app">
+    {{counter}}
+    <button @click = "plus">+</button>
+    <button @click = "minus">-</button>
+    <input type="text" v-model.number = "num">
+  </div>
+  <script>
+  const store = new Vuex.Store({
+    state : {
+      counter : 0
+    },
+    actions: {
+      increment({commit},value){
+        commit("increment",value)
+      },
+      decrement({commit},value){
+        commit("decrement",value)
+      }
+    },
+    mutations:{
+      increment (state,value){
+        state.counter+=value
+      },
+      decrement (state,value){
+        state.counter-=value
+      }
+    }
+  })
+
+  let vm = new Vue({
+    el : "#app",
+    computed : {
+      counter(){
+        return store.state.counter
+      }
+    },
+    data: {
+      num : 1
+    },
+    methods : {
+      plus(){
+        store.dispatch("increment",this.num)
+      },
+      minus(){
+        store.dispatch("decrement",this.num)
+      }
+    }
+  })
+  </script>
+</body>
+</html>

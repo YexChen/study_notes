@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js" ></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js" ></script>
+</head>
+<body>
+  <div id="app">
+    <h1>Hello world</h1>
+    <div>
+      <p>
+        <router-link to= "/shop">商城界面</router-link>
+        <router-link to= "/user">用户界面</router-link>
+      </p>
+    </div>
+    <main>
+      <router-view></router-view>
+    </main>
+  </div>
+  <script>
+    let bus = new Vue()
+
+    let shopComponent= {
+      template : `
+      <div>
+        <h1>我是商城界面</h1>
+        <router-link to= "/shop/add">添加商品</router-link>
+        <router-link to= "/shop/view">浏览商品</router-link>
+        <router-view></router-view>
+      </div>`
+    }
+    let userComponent = {
+      template: `<div><h1>我是用户界面</h1></div>`
+    }
+
+    let shopViewComponent= {
+      template: `<div>
+        <ul>
+          <li v-for = "item in itemList">{{item.name}}:{{item.price}}</li>
+        </ul>
+      </div>`,
+      data(){
+        return {
+          itemList: []
+        }
+      },
+      created : function(){
+        console.log("view created!")
+        bus.$on('createGoods',payload=>{
+          console.log(1234)
+          this.itemList.push(payload.item)
+        })
+      }
+    }
+
+    let shopAddComponent= {
+      template: `
+      <div>
+        <label for="">商品名</label><input type="text" v-model= "item.name"/>
+        <label for="">商品价格</label><input type="text" v-model= "item.price"/>
+        <button @click="addGoods">添加商品</button>
+      </div>`,
+      data(){
+        return {
+          item: {
+            name: "",
+            price: ""
+          }
+        }
+      },
+      methods:{
+        addGoods : function(){
+          bus.$emit("createGoods",{item: this.item})
+        }
+      }
+    }
+
+    let routes = [
+      {
+        path : '/',
+        redirect: '/shop'
+      },
+      {
+        path: '/shop',
+        component: shopComponent,
+        children: [
+          {
+            path: 'add',
+            component: shopAddComponent
+          },
+          {
+            path: 'view',
+            component: shopViewComponent
+          }
+        ]
+      },
+      {
+        path : '/user',
+        component: userComponent
+      }
+    ]
+
+    let newRouter = new VueRouter({
+      routes
+    })
+
+    let vm = new Vue({
+      el: "#app",
+      router : newRouter
+    })
+  </script>
+</body>
+</html>

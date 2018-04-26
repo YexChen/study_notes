@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1 v-console>瓜子二手车{{msg}}</h1>
+    <!-- <input type="text" v-model = "msg"> -->
+    <img src="./logo.png" alt="" v-img>
+  </div>
+  <script>
+    Vue.directive('console',{
+      bind: function(el){
+        console.log("bind!:"+el)
+      },
+      update: function(el){
+        console.log("update!:"+el)
+      }
+    })
+
+    Vue.directive('img',{
+      bind: function(el){
+        el.addEventListener("click",function(){
+          let t= document.createElement("img")
+          t.src= "./logo.png"
+          t.style.width= "500px"
+          t.style.height= "500px"
+          t.style.position = "absolute"
+          t.style.top = "0px"
+          t.style.left = "500px"
+          document.body.appendChild(t)
+          t.addEventListener("click",function(){
+            document.body.removeChild(t)
+          })
+        })
+      },
+      update: function(el){
+        console.log("update!:"+el)
+      },
+      unbind: function(el){
+        console.log("unbind!"+el)
+      },
+      inserted: function(el){
+        console.log("inserted!"+el)
+      }
+    })
+    let app = new Vue({
+      el: "#app",
+      data: {
+        msg: ''
+      }
+    })
+  </script>
+</body>
+</html>

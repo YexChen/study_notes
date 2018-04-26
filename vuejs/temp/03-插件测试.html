@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model = "rData">
+    <p>{{tData}}</p>
+    <button @click = "test"></button>
+    <child></child>
+  </div>
+  <script>
+    var inputNumber = {}
+
+    inputNumber.install = function(Vue,options){
+      Vue.prototype.doubleNumber = function(val){
+        return val*2
+      }
+      Vue.mixin({
+        created: function(){
+          console.log("I'm created")
+        },
+        methods: {
+          test: function(){
+            console.log("tested")
+          }
+        }
+      })
+      Vue.component("child",{
+        template: "<div>child</div>"
+      })
+    }
+
+    Vue.use(inputNumber)
+
+    let vm = new Vue({
+      el: "#app",
+      data: {
+        rData: 0
+      },
+      computed: {
+        tData: function(){
+          return this.doubleNumber(this.rData)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

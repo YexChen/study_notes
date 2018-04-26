@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <script src="javascripts/06-compiled.js"></script>
+  <link rel="stylesheet" href="stylesheets/06-element.css">
+</head>
+<body>
+  <div id="app">
+    <label for="">基本用法</label><el-numbers></el-numbers>
+    <label for="">最小值</label><el-numbers :min = 10 ></el-numbers>
+    <label for="">最小最大值</label><el-numbers :min= 10 :max= 20></el-numbers>
+    <label for="">步长</label><el-numbers :step= 10></el-numbers>
+    <label for="">使用不同样式</label><el-numbers :size= "size"></el-numbers>
+  </div>
+  <script>
+    Vue.use(elementNumbers)
+
+    let vm = new Vue({
+      el: "#app",
+      data: {
+        size: "small"
+      }
+    })
+  </script>
+</body>
+</html>

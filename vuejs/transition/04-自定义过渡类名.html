@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div id="demo">
+    <button @click = "show = !show">点我</button>
+    <transition name = "bounce" enter-active-class = "animated flipInX" leave-active-class = "animated fadeOutLeft">
+      <p v-if = "show">　无间之钟，敲响它的时候也就代表着现世能够得到幸福
+  　但来世却必将坠入痛苦持续无间的最可怕地狱——无间地狱。
+  　大概是，压迫着大部分人鼓膜时间最长的曲子
+  　所以削弱了曲子中的落差从而听起来不易产生疲劳。
+  　真可谓无间地狱。呵哈哈哈，就给我好好努力吧！</p>
+    </transition>
+  </div>
+  <script>
+    let vm = new Vue({
+      el : "#demo",
+      data : {
+        show : true
+      }
+    })
+  </script>
+</body>
+</html>

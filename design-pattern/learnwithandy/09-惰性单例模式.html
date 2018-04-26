@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //singleLeton 单例模式
+    var mySingleLeton = (function(){
+      'use strict'
+      var instance
+
+      var init = function(){
+        var config = {
+          lang: "zh-cn",
+          cache: true
+        }
+        var plus = function(){
+          this.counter++
+        }
+        var showConfig = function(){
+          return config
+        }
+        return{
+          counter: 0,
+          add: plus,
+          show: showConfig
+        }
+      }
+      return {
+        getInstance : function(){
+          if(!instance) instance = init()
+          return instance
+        }
+      }
+    })()
+
+    var a = mySingleLeton.getInstance()
+    var b = mySingleLeton.getInstance()
+    //console.log(a===b)
+    //这里附上传统例模式
+    var traditionalLeton = (function(){
+      'use strict'
+      var instance
+
+      var init = function(){
+        var config = {
+          lang: "zh-cn",
+          cache: true
+        }
+        var plus = function(){
+          this.counter++
+        }
+        var showConfig = function(){
+          return config
+        }
+        return{
+          counter: 0,
+          add: plus,
+          show: showConfig
+        }
+      }
+      return {
+        getInstance : function(){
+          instance = init()
+          return instance
+        }
+      }
+    })()
+    var c= traditionalLeton.getInstance()
+    var d= traditionalLeton.getInstance()
+    //console.log(c === d)
+  </script>
+</body>
+</html>

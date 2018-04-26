@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <style>
+    .fade-leave-to{
+      opacity : 0;
+      transform : translateX(10px);
+    }
+    .fade-enter{
+      opacity : 0;
+      transform : translateX(-10px);
+    }
+    .fade-enter-active{
+      transition : all .5s ease
+    }
+    .fade-leave-active{
+      transition : all .5s ease
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model = "editingText" @focus = "editStatus = true" @blur = "editStatus =false">
+    <transition name = "fade">
+      <button v-if = "editStatus" key = "save">编辑中</button>
+      <button v-else key = "edit">完成</button>
+    </transition>
+    <br>
+    <!-- 第二个实例 -->
+    <transition name = "fade">
+      <button v-bind:key = "editStatus">
+        {{editStatus?'save':"edit"}}
+      </button>
+    </transition>
+    <br>
+    <!-- 第三个实例-过渡模式 -->
+    <transition name = "fade" mode = "out-in">
+      <button v-bind:key = "editStatus">
+        {{editStatus?'save':"edit"}}
+      </button>
+    </transition>
+  </div>
+  <script>
+    new Vue({
+      el : "#app",
+      data : {
+        editingText : "",
+        editStatus : false
+      }
+    })
+  </script>
+</body>
+</html>

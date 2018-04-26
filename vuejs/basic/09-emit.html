@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <child @parent-add = 'addTotal' :parent-count = 'total'></child>
+    <child @parent-add = 'addTotal' :parent-count = 'total'></child>
+    <child @parent-add = 'addTotal' :parent-count = 'total'></child>
+    total : {{total}}
+  </div>
+
+  <script>
+    let child = {
+      props : ['parentCount'],
+      data: function(){
+        return{
+          count : this.parentCount
+        }
+      },
+      methods : {
+        childAdd : function(){
+          this.count++
+          this.$emit('parent-add',{num: this.count})
+        }
+      },
+      template : "<div @click = 'childAdd'>child : {{this.count}}</div>"
+    }
+
+    let vm = new Vue({
+      el : "#app",
+      data : {
+        total : 0
+      },
+      methods : {
+        addTotal : function(payload){
+          this.total += payload.num
+        }
+      },
+      components : {
+        'child' : child
+      }
+    })
+  </script>
+</body>
+</html>

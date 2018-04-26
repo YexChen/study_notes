@@ -1,0 +1,19 @@
+#-*- coding : utf-8 -*-
+monthDays = [31,28,31,30,31,30,31,31,30,31,30,31]
+
+def isRunnian(year):
+    return year%4 == 0 and (year% 100 != 0 or year% 400 == 0)
+
+def date2days(year,month,day):
+    days = 0
+    if(isRunnian(year)):
+        monthDays[1] = 29
+    for i in range(month):
+        #print "month: {},i:{},days:{}".format(month,i,days)
+        if(month != i+1):
+            days += monthDays[i]
+        else:
+            days += day
+    return days
+
+print(date2days(int(raw_input("input year pls")),int(raw_input("input month pls")),int(raw_input("input days pls"))))

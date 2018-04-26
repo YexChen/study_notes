@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <a href="javascript:;" @click = "changeSwitch(0)">今日花边新闻</a>
+    <a href="javascript:;" @click = "changeSwitch(1)">前端学习</a>
+    <a href="javascript:;" @click = "changeSwitch(2)">Steam特卖</a>
+    <component :is="switches"></component>
+  </div>
+  <script>
+    let vm = new Vue({
+      el: "#app",
+      data:{
+        switches: "switch0"
+      },
+      methods:{
+        changeSwitch(n){
+          this.switches = "switch" + n
+        }
+      },
+      components:{
+        switch0: {
+          template : `<ul>
+            <li>花</li>
+            <li>边</li>
+            <li>新闻</li>
+          </ul>`
+        },
+        switch1: {
+          template: `<ul>
+            <li>前</li>
+            <li>端</li>
+            <li>学习</li>
+          </ul>`
+        },
+        switch2: {
+          template: `<ul>
+            <li>幕府2全面战争</li>
+            <li>恶灵附身2</li>
+            <li>黑暗之魂3</li>
+          </ul>`
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    /* 在根节点中注册，全局css */
+    :root{
+      --global-color: blue
+    }
+
+    /*这里面的是局部css变量*/
+    #app{
+      height: 500px;
+      --main-color: purple;
+      background-color: var(--main-color)
+    }
+
+    .child{
+      width: 200px;
+      height: 200px;
+      background-color: var(--global-color)
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="child"></div>
+  </div>
+</body>
+</html>

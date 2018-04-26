@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    counter = 9999
+    var counter = (function(){
+      'use strict'
+      var counter = 0
+      return {
+        add(){
+          counter++
+        },
+        print(){
+          console.log(counter)
+        }
+      }
+    })()
+
+    counter.print()
+    counter.add()
+    counter.print()
+    counter.add()
+    counter.print()
+
+
+    var news = (function(){
+      var counter = 0
+
+      var pMethod = function(bar){
+        console.log(bar)
+      }
+
+      return {
+
+        TotalCounter : 0,
+
+        add : function(bar){
+          counter++
+          pMethod(bar)
+        }
+      }
+    })()
+
+    news.add(777)
+
+    var basketModule = (function(){
+      'use strict'
+      var basket = []
+      return {
+        addItem(item){
+          if(typeof item !== 'object' || typeof item.price !== 'number') throw new Error("illegal item thrown to basket")
+          basket.push(item)
+        },
+        getBasketLength(){
+          return basket.length
+        },
+        getToalPrice(){
+          var price = 0
+          basket.forEach(item=>{
+            price += item.price
+          })
+          return price
+        }
+      }
+    })()
+
+    basketModule.addItem({name: "basketball",price:999})
+
+    basketModule.addItem({name: "football",price: 666})
+
+    // basketModule.addItem({name: "unknown"})
+
+    console.log(basketModule.getBasketLength())
+
+    console.log(basketModule.getToalPrice())
+  </script>
+</body>
+</html>

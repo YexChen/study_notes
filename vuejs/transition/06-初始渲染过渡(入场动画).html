@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div id="app">
+    <transition
+      appear
+      appear-class = "custom-appear-class"
+      appear-active-class = "animated bounceInDown"
+    >
+      <h1>Magic Unicorn hiccup</h1>
+    </transition>
+    <transition>
+      <h1>Magic Unicorn hiccup</h1>
+    </transition>
+    <transition>
+      <h1>Magic Unicorn hiccup</h1>
+    </transition>
+  </div>
+  <script>
+    new Vue({
+      el : "#app"
+    })
+  </script>
+</body>
+</html>

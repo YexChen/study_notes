@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .floatLeft{
+      float: left
+    }
+    div:after{
+      clear: both;
+      content: '';
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <button>按钮</button>
+    <button>按钮</button>
+    <button>按钮</button>
+    <button>按钮</button>
+    <button>按钮</button>
+  </div>
+  <div class="another">
+    巴拉巴拉
+    <button>按钮浮动</button>
+  </div>
+  <script type="text/javascript">
+    let oBtn = document.querySelector(".another").querySelector("button")
+    oBtn.onclick= function(){
+      document.querySelectorAll("button").forEach(dom=>{
+        dom.className = "floatLeft"
+      })
+    }
+  </script>
+</body>
+</html>

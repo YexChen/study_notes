@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var data = {
+      name : 'Yexchen',
+      age : 21,
+      sex : 'male'
+    }
+
+    function observe(obj){
+      if( !obj || typeof obj !== 'object'){
+        return
+      }
+      Object.keys(obj).forEach(function(key){
+        createRelative(obj,key,obj[key])
+      })
+    }
+
+    function createRelative(obj,key,value){
+      observe(value)
+      Object.defineProperty(obj,key,{
+        enumerable : true,
+        get : function(){
+          return value
+        },
+        set : function(newval){
+          console.log(`liste report : ${key} has been changed: ${value} turn to ${newval}`)
+          value = newval
+        }
+      })
+    }
+
+    observe(data)
+  </script>
+</body>
+</html>

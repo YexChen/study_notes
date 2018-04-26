@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h1>我是h1</h1>
+  <p>我是p</p>
+  <script>
+  //使用这种设计模式,可以整合很多框架的内容
+
+  //写个jq选择器
+  var $ = function(selector){
+    return document.querySelector(selector)
+  }
+
+  //写个最简单的underscore
+  var _ = (function(){
+    return {
+      min(array){
+        var min = array[0]
+        array.forEach(value=>{
+          if(value<min) min = value
+        })
+        return min
+      }
+    }
+  })()
+
+  var module  = (function($,_){
+
+    function ct(el,content){
+      return $(el).innerHTML = content
+    }
+
+    function m(array){
+      return _.min(array)
+    }
+    return {
+      changeText(el,content){
+        return ct(el,content)
+      },
+      min(){
+        var array = Array.prototype.slice.call(arguments)
+        return m(array)
+      }
+    }
+  })($,_)
+  </script>
+</body>
+</html>

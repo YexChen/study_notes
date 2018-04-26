@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //这种设计模式能更清晰的分好模块
+    var myModule = (function(){
+      'use strict'
+      var module = {}
+      var counter = 0
+
+      module.add = function(num){
+        counter+=num
+      }
+
+      module.show= function(){
+        return counter
+      }
+      return module
+    })()
+  </script>
+</body>
+</html>

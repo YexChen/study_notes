@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #app{
+      width: 12em;
+      height: 10em;
+      margin: 0 auto;
+      background: url("./game_background.jpg") no-repeat right bottom #58a;
+      background-position: right 20px bottom 10px;
+      background-size: 3em;
+    }
+    #app2{
+      width: 12em;
+      height: 10em;
+      margin: 0 auto;
+      background: url("./game_background.jpg") no-repeat right bottom #58a;
+      background-size: 5em;
+      background-origin: content-box;
+    }
+    #app3{
+      width: 12em;
+      height: 10em;
+      margin: 0 auto;
+      background: url("./game_background.jpg") no-repeat right bottom #58a;
+      background-size: 5em;
+      background-origin: content-box;
+      background-position: calc(100% - 20px) calc(100% - 20px)
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div id="app2"></div>
+  <div id="app3"></div>
+</body>
+</html>

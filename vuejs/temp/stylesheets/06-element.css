@@ -1,0 +1,13 @@
+.large{
+  width: 500px;
+  height: 50px;
+}
+
+.large input{
+  width: 60%;
+}
+
+.small{
+  width: 300px;
+  height: 50px;
+}

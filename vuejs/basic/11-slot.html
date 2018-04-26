@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <child>
+    </child>
+    <child>
+      <p slot = "final">变态女仆猥亵幼女</p>
+      <p>天然庭师到处砍人</p>
+      <p>巨乳风祝传播邪教</p>
+    </child>
+  </div>
+
+  <script>
+    let child = {
+      template : `
+      <div>
+        <p>-----我是一个愉快的子组件------</p>
+        <slot>
+          小蕾咪荡起双桨
+        </slot>
+        <slot name = "final"></slot>
+      </div>`
+    }
+
+    let vm = new Vue({
+      el: "#app",
+      data : {
+
+      },
+      components: {
+        child
+      }
+    })
+  </script>
+</body>
+</html>

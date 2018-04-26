@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>声明式渲染</1>
+    {{message}}
+    <br>
+    <h1>这里是鼠标悬停效果</h1>
+    <span v-bind:title = "hiddentitle">
+      在我身上停一下
+    </span>
+    <h1>这里是v-if的效果</h1>
+      <label for="" v-if = "seen">你看不见我？</label>
+    <h1>这里是v-for的效果</h1>
+      <label for="" v-for = "todo in todos">
+        {{todo.text}}
+      </label>
+    <h1>这里是点击效果</h1>
+      <button @click = "reverseText">点击我翻转文字</button>
+      {{mytext}}
+    <h1>这里是v-model双向绑定效果</h1>
+      {{mybind}}
+      <input type="text" v-model = "mybind">
+  </div>
+
+  <script>
+  const app = new Vue({
+    el : "#app",
+    data : {
+      message : "Hello world",
+      hiddentitle : "你看到我了！",
+      seen : false,
+      todos : [
+        { text : "我爱学习\n"},
+        { text : "就见鬼了啊！\n"},
+        { text : "打游戏才有前途\n"}
+      ],
+      mytext : "鬼人正邪",
+      mybind : "嗯哈哈哈"
+    },
+    methods : {
+      reverseText : function(){
+        this.mytext = this.mytext.split("").reverse().join("")
+      }
+    },
+    created : function(){
+      console.log("vue instance has been created!")
+    }
+  })
+  app.$watch("seen",function(newV,oldV){
+    console.log(`seen has been changed! newValue is ${newV} oldValue is ${oldV}`)
+  })
+  </script>
+</body>
+</html>

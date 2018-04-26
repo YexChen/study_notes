@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" cont
+  ent="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #app{
+      background: url("./game_background.jpg");
+      background-size: cover;
+      padding: 1em;
+      color: black;
+    }
+    #app > div{
+      background-color: white;
+      padding: 1em;
+    }
+    #stone{
+      padding: 1em;
+      margin-top: 100px;
+      border: 1em solid transparent;
+      background: linear-gradient(white,white),
+      url("./game_background.jpg");
+      background-size: cover;
+      background-clip: padding-box,border-box;
+      background-origin: border-box;
+    }
+    #envelope{
+      margin-top: 100px;
+      padding : 1em;
+      border: 16px solid transparent;
+      background-image: repeating-linear-gradient(45deg,red 0,red 1em,transparent 0,transparent 1em,blue 0,blue 1em);
+      background-size: 50px 50px;
+    }
+  </style>
+</head>
+<body>
+  <div id= "app">
+    <div>
+      我有一个漂亮的边框
+    </div>
+  </div>
+  <div id="stone"></div>
+  <div id="envelope"></div>
+</body>
+</html>

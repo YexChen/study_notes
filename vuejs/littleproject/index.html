@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
+  <script src="js/vue.js"></script>
+  <script src="js/underscore.js"></script>
+  <script src="node_modules/axios/dist/axios.js"></script>
+</head>
+<body>
+  <section class="todoapp" id = "app">
+      <!-- 添加 -->
+			<header class="header">
+				<h1>云备忘</h1>
+				<input class="new-todo" placeholder="接下来要做什么呢?" autofocus=""
+        @keyup.enter= "addTodolist" v-model= "newTodo">
+			</header>
+
+      <!-- 主体部分 -->
+			<section class="main" style="display: block;">
+				<input class="toggle-all" id="toggle-all" type="checkbox">
+				<label for="toggle-all">Mark all as complete</label>
+				<ul class="todo-list">
+          <!-- 单个事项 -->
+          <li v-for = "(todo,index) in filtedTodos" :class= "{completed:todo.isDone,editing:editing.editingIndex === index}">
+      			<div class="view">
+      				<input class="toggle" type="checkbox" @click = "changeDone(todo)" v-model = "todo.isDone">
+      				<label @dblclick = "recordEditingIndex(index)">{{todo.text}}</label>
+      				<button class="destroy" @click= "deleteTodo(todo)"></button>
+      			</div>
+			    <input class="edit" value="asda" v-focus= "editing.editingIndex === index" v-model= "todo.text" @blur= "doneEditing()">
+		      </li>
+        </ul>
+			</section>
+      <!-- 底部 -->
+			<footer class="footer" style="display: block;">
+			<span class="todo-count"><strong>1</strong> item left</span>
+			<ul class="filters">
+				<li>
+					<a :class="{selected: filter === 'all'}" href="#/" @click = "changeFilter('all')">All</a>
+				</li>
+				<li>
+					<a href = "#/active" :class="{selected: filter === 'active'}" @click = "changeFilter('active')">Active</a>
+				</li>
+				<li>
+					<a href = "#/complete" :class="{selected: filter === 'completed'}" @click= "changeFilter('completed')">Completed</a>
+				</li>
+			</ul>
+
+		</footer>
+		</section>
+
+    <script>
+      //新建指令focus
+      Vue.directive('focus',{
+        inserted: function(el){
+          el.focus()
+        },
+        update(el){
+          el.focus()
+        }
+      })
+      //过滤器
+      let filters = {
+        all: function(array){
+          return array
+        },
+        active: function(array){
+          return array.filter(function(ele){
+            return !ele.isDone
+          })
+        },
+        completed: function(array){
+          return array.filter(function(ele){
+            return ele.isDone
+          })
+        }
+      }
+      //主vm
+      let vm = new Vue({
+        el: "#app",
+        data: {
+          newTodo: '',
+          filter: 'all',
+          todoLists: [],
+          editing: {
+            editingIndex: undefined,
+            editingText: ""
+          }
+        },
+        methods: {
+          addTodolist: function(){
+            /*
+            待增加功能:
+            2.重复文本不能插入
+            */
+            if(this.newTodo === '') return
+
+            this.todoLists.push({
+              text: this.newTodo,
+              isDone: false
+            })
+
+            this.newTodo = ''
+
+          },
+          changeDone: function(todo){
+            this.todoLists[_.indexOf(this.todoLists,todo)].isDone = !this.todoLists[_.indexOf(this.todoLists,todo)].isDone
+          },
+          deleteTodo: function(todo){
+            this.todoLists= _.without(this.todoLists,todo)
+          },
+          recordEditingIndex: function(index){
+            this.editing.editingIndex = index
+          },
+          doneEditing: function(){
+            this.editing.editingIndex = -1
+          },
+          changeFilter: function(targetFilter){
+            this.filter = targetFilter
+          }
+        },
+        computed: {
+          filtedTodos: function(){
+            return filters[this.filter](this.todoLists)
+          }
+        },
+        created: function(){
+          // axios.get().then().catch()
+        }
+      })
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <script>
+    a = [0,20,50,10,70,30,80,90,40,60]
+    a = a.sort()
+
+    i = prompt('请输入一个数字，我找找')
+    console.log(dilivefind(parseInt(i),a))
+
+    function dilivefind(num,array){
+      middle = Math.floor(array.length/2)
+      if(middle == 1 && num < array[middle]){
+        return(`我找到啦,在${array[middle-1]}和${array[middle]}中间`)
+      }
+      else if(middle == 1 && num > array[middle]){
+        return(`我找到啦,在${array[middle]}和${array[middle+1]}中间`)
+      }
+      if(num > array[middle])  return dilivefind(num,array.slice(middle))
+      else if(num < array[middle]) return dilivefind(num,array.slice(0,middle))
+    }
+  </script>
+</body>
+</html>

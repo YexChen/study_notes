@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>模版字符串</h1>
+    <h1>文本插值</h1>
+    <p>{{msg}}</p>
+    <h1>html插值</h1>
+    <p v-html = "rawhtml"></p>
+    <h1>动态绑定id</h1>
+    <p :id = "'list-'+dynamicId">我的Id</p>
+    <h1>动态绑定属性</h1>
+    <button :disabled = "disabled">点我呀</button>
+    <h1>动态绑定url</h1>
+    <a :href="url">百度</a>
+    <h1>表单阻止默认事件</h1>
+    <form @submit.prevent = "posted" :action = "url">
+      <button>点我提交</button>
+    </form>
+  </div>
+
+  <script>
+    vm = new Vue({
+      el : "#app",
+      data : {
+        msg : "我是文本插的值",
+        rawhtml : "<span>今天怎么不开心</span>",
+        dynamicId : 66,
+        disabled : true,
+        url : "http://www.baidu.com"
+      },
+      methods : {
+        posted : function(){
+          console.log("form has been posted")
+        }
+      }
+    })
+  </script>
+</body>
+</html>

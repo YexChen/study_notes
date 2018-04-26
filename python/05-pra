@@ -1,0 +1,24 @@
+
+class Rabit(object):
+
+    def __init__(self):
+        self.age = 0
+    def makeBaby(self):
+        if self.age > 3:
+           rabits.append(Rabit())
+    def growUp(self):
+        self.age += 1
+
+
+rabits = [Rabit()]
+
+def howmanyRabit(numbers):
+    
+    for i in range(numbers+1):
+        for k,v in enumerate(rabits):
+            v.growUp()
+            v.makeBaby()
+
+    return len(rabits)
+
+print howmanyRabit(int(raw_input("how many months after?")))

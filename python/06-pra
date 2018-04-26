@@ -1,0 +1,16 @@
+result = []
+
+def factor(number):
+    for i in range(number):
+        for j in range(i):
+	    if(i*j == number):
+                factor(i)
+                factor(j)
+                break
+    result.append(number)
+    return result
+
+def fetchFactor(number):
+    return factor(number)
+            
+print(fetchFactor(10))

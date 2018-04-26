@@ -1,0 +1,7 @@
+def multipleCaculation(tuple,times):
+    result = 0
+    Tn = tuple
+    for i in range(1,times+1):
+        result += Tn
+        Tn = Tn + tuple*10**i
+    

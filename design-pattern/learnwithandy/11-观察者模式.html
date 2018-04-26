@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input type="checkbox">
+  <button>添加新的按钮</button>
+  <div class="observersDiv"></div>
+  <script>
+    //观察者列表,内部维护一个装观察者的容器,提供各种修改容器的方法
+    function ObserverList(){
+      this.observerList = []
+    }
+
+    ObserverList.prototype.add = function(obj){
+      this.observerList.push(obj)
+      return this
+    }
+
+    ObserverList.prototype.count = function(){
+      return this.observerList.length
+    }
+
+    ObserverList.prototype.get = function(index){
+      if(index>-1&&index<this.count()) return this.observerList[index]
+      return -1
+    }
+
+    ObserverList.prototype.removeAt = function(index,num){
+      num = num || 1
+      if(index>-1&&index<this.count()){
+        this.observerList.splice(index,num)
+        return this
+      }
+      return -1
+    }
+
+    //这里是subject,科目管理器,用来管理多个观察者
+    function Subject(){
+      this.observers = new ObserverList()
+    }
+
+    Subject.prototype.addObserver = function(obj){
+      this.observers.add(obj)
+    }
+
+    Subject.prototype.removeObserver = function(obj){
+      //这里应该添加错误处理
+      this.observers.removeAt(this.observers.indexOf(obj))
+    }
+
+    Subject.prototype.notify = function(context){
+      var _this = this
+      this.observers.observerList.forEach(function(value,index){
+        _this.observers.get(index).update(context)
+      })
+    }
+
+    //我们还得有具体的观察者
+    var Observer = function(){
+
+    }
+
+
+    //信号变量,获取几个dom
+    let $ = function(sel){
+      return document.querySelector(sel)
+    }
+    var oCheck = $("input")
+    var oAdd = $("button")
+    var oDiv = $(".observersDiv")
+
+    //扩展函数,扩展键值对
+    function extend(obj,ext){
+      for(var key in ext){
+        obj[key] = ext[key]
+      }
+    }
+
+    //为oCheck扩展一下
+    extend(oCheck,new Subject())
+
+    //添加事件-点击勾选
+    oCheck.addEventListener("click",function(){
+      this.notify(this.checked)
+    })
+    //添加事件-点击添加元素
+    oAdd.addEventListener("click",function(){
+      addNewObject()
+    })
+
+    //添加新的元素
+    function addNewObject(){
+      var newDom = document.createElement("input")
+      newDom.type = "checkbox"
+      extend(newDom,new Observer())
+      newDom.update = function(context){
+        newDom.checked = context
+      }
+      oCheck.addObserver(newDom)
+      oDiv.appendChild(newDom)
+    }
+  </script>
+</body>
+</html>

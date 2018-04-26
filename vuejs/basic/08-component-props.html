@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <child :msg = "msg" :child-message = 'myMessage'></child>
+    <input type="text" v-model = "myMessage">
+  </div>
+
+  <div id="app2">
+    <child2 :parent-counter = 'parentCounter'></child2>
+  </div>
+
+  <div id="app3">
+    <child3 :origin-string= 'originString'></child3>
+    <input type="text" v-model = "originString">
+  </div>
+
+  <script>
+    Vue.component('child',{
+      props : {
+        msg : String,
+        childMessage : String
+      },
+      template : '<div>{{msg}}:{{childMessage}}</div>'
+    })
+
+    let vm = new Vue({
+      el : "#app",
+      data : {
+        msg : "hello world",
+        myMessage : ''
+      }
+    })
+
+    Vue.component('child2',{
+      props : ['parentCounter'],
+      data : function(){
+        return{
+        childCounter : this.parentCounter
+        }
+      },
+      template : "<div @click = 'childCounter++'>{{parentCounter}}-{{childCounter}}</div>"
+    })
+
+    let vm2 = new Vue({
+      el : "#app2",
+      data : {
+        parentCounter : 0
+      }
+    })
+
+    Vue.component('child3',{
+      props : ['originString'],
+      computed : {
+        trimedString : function(){
+          return this.originString.trim().toLowerCase()
+        }
+      },
+      template : "<div>{{originString}}--{{trimedString}}</div>"
+    })
+
+    let vm3 = new Vue({
+      el : "#app3",
+      data : {
+        originString : ""
+      }
+    })
+  </script>
+</body>
+</html>

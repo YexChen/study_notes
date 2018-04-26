@@ -1,0 +1,10 @@
+list = [1,2,3,4]
+result = []
+
+for i in list:
+    for j in list:
+        for k in list:
+            if(i != j and j!=k  and  i!=k):
+                result.insert(len(result),i*100 + j*10 + k*1)
+
+print result    

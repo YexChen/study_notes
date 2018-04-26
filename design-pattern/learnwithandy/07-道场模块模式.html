@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //传过来obj.xx.yy 返回一个包含xx,yy的空值
+    var dojo = (function(){
+      'use strict'
+
+      var targetObj = null
+      var handleValue = undefined
+      var currentObj = undefined
+      var returnValue = undefined
+      var init = function(obj){
+        targetObj = obj
+        handleValue = obj.split(".")
+        currentObj = undefined
+      }
+      var handle = function(){
+        if(handleValue.length <= 0) return handleValue
+        currentObj = new Object()
+        returnValue = currentObj
+        handleValue.forEach(function(value){
+          currentObj = currentObj[value] = {}
+        })
+        return returnValue
+      }
+      return {
+        dojo: function(targetObject){
+          init(targetObject)
+          return handle()
+        }
+      }
+    })()
+
+    console.log(dojo.dojo("aaa.bbb.ccc.ddd"))
+  </script>
+</body>
+</html>

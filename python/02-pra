@@ -1,0 +1,12 @@
+profitTable = [0.01,0.015,0.03,0.05,0.075,0.1]
+profitBlock = [1000000,600000,400000,200000,100000,0]
+
+def getPrice(salary) :
+    price = 0
+    for k,v in enumerate(profitBlock):
+        if salary > v:
+            price += (salary-v)*profitTable[k]
+            salary = v
+    return price            
+
+print getPrice(int(raw_input("please enter your salary")))

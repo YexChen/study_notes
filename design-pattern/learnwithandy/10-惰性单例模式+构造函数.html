@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var singleLetonModule = (function(){
+      var instance
+      function SingleLeton(options){
+        this.name = "I'm coordinate"
+
+        this.options = options || {}
+
+        this.x = this.options.x || 5
+
+        this.y= this.options.y || 10
+
+      }
+
+      var _static = {
+        name: "static coordinate",
+        getInstance: function(options){
+          //这里本应加入参数检查
+          if(!instance) instance = new SingleLeton(options)
+          return instance
+        }
+      }
+
+      return _static
+    })()
+
+    console.log(singleLetonModule.name)
+    //单例已经被a创造了,所以在b中还是打印的a的单例
+    a = singleLetonModule.getInstance()
+    b = singleLetonModule.getInstance({x:999,y:999})
+    // console.log(a === b)
+  </script>
+</body>
+</html>

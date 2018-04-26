@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var myRevealModule = (function(){
+      'use strict'
+      var counter = 0
+
+      var addCounter = function(num){
+        num = num || 1
+        counter+=num
+      }
+
+      var getCounter = function(){
+        return counter
+      }
+
+      var clearCounter = function(){
+        counter = 0
+      }
+
+      return {
+        addCounter: addCounter,
+        getCounter: getCounter
+      }
+    })()
+
+    myRevealModule.addCounter()
+    console.log(myRevealModule.getCounter())
+
+  </script>
+</body>
+</html>

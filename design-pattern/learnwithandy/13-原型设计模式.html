@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //直接继承
+    var myCar = {
+      name: "Benz",
+
+      drive: function(){
+        console.log("wmmmmmmmmm on the road now!")
+      },
+
+      panic: function(){
+        console.log("wait. how to stop this thing?")
+      }
+    }
+
+    var yourCar = Object.create(myCar)
+
+    console.log(yourCar)
+
+    //这里是差异性继承
+    var vehicle = {
+      getModel: function(){
+        console.log("the model of this engine is :"+this.model)
+      }
+    }
+
+    var newCar = Object.create(vehicle,{
+      "id": {
+        value: 10086,
+        enumerable: true
+      },
+      "model": {
+        value: "cc-m768",
+        enumerable: true
+      }
+    })
+
+    //继承原型而不是属性
+    var vehiclePrototype = {
+      init: function(model){
+        this.model = model
+      },
+      getModel: function(){
+        return this.model
+      }
+    }
+
+    function Vehicle(model){
+      function F(){}
+      F.prototype = vehiclePrototype
+      var f = new F()
+      f.init(model)
+      return f
+    }
+
+    var f = new Vehicle("I'm model")
+    console.dir(f)
+
+
+    //
+    var baget = (function(){
+      function F(){}
+      return function(pro){
+        F.prototype = pro
+        return new F()
+      }
+    })()
+    // anlahucba
+  </script>
+</body>
+</html>

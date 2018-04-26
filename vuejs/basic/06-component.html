@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <mykid></mykid>
+  </div>
+  <script>
+
+    let mtop = {
+      template : "<p>top</p>"
+    }
+
+    let middle = {
+      template : "<p>middle</p>"
+    }
+
+    let bottom = {
+      template : "<p>bottom</p>"
+    }
+
+    let Child = {
+      template : "<div>Custom component  <mtop></mtop> <middle></middle> <bottom></bottom></div>",
+      components : {
+        "mtop" : mtop,
+        "middle" : middle,
+        "bottom" : bottom
+      }
+    }
+
+    let vm = new Vue({
+      el : "#app",
+      components :{
+        'mykid' : Child
+      }
+    })
+  </script>
+</body>
+</html>

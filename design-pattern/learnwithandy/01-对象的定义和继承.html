@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //创造对象的三种方式
+    var newObject = {}
+
+    var newObject2 = Object.create(Object.prototype)
+
+    var newObject3 = new Object()
+
+    var newObject4 = new Object()
+
+    //使用defineProperty来进行构造
+    Object.defineProperty(newObject,"age",{
+      value: 17,
+      writable: false
+    })
+
+    Object.defineProperty(newObject2,"age",{
+      value: 19,
+      writable: true
+    })
+
+    var defineProp = function(obj,key,value){
+      var config = {
+        writable: true,
+        value: value
+      }
+      Object.defineProperty(obj,key,config)
+    }
+
+    defineProp(newObject3,"age",9)
+    defineProp(newObject3,"age",9)
+
+    Object.defineProperties(newObject4,{
+      "age": {
+        value: 19,
+        writable: true
+      },
+      "name": {
+        value: "chen",
+        writable: true
+      }
+    })
+
+    var newObject5 = Object.create(newObject4)
+    
+  </script>
+</body>
+</html>

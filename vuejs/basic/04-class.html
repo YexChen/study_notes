@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <style>
+    .danger-color{
+      color : red
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <p :class = "{'danger-color' : isdanger}">我危险吗</p>
+    <p v-if = "isif">我显示吗</p>
+    <p v-show = "isshow">我呢</p>
+  </div>
+
+  <script>
+  const vm = new Vue({
+    el : "#app",
+    data : {
+      isdanger : true,
+      isif : true,
+      isshow : true
+    }
+  })
+  </script>
+</body>
+</html>

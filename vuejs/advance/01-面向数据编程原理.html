@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h2></h2>
+  <script>
+    let oH2= document.querySelector("h2")
+    let obj= {}
+    let initValue= {
+      el : "",
+      data: {
+
+      },
+      methods: {
+
+      }
+    }
+
+    //这里可以封起来,定义data
+    Object.defineProperty(obj,arg,{
+      get : function(){
+        return initValue.arg
+      },
+      set : function(newValue){
+        initValue.arg= newValue
+        //下面这句要改一改,改变一个值的通知改变了vm树
+        initValue.el.innerHTML = initValue.dom
+      }
+    })
+
+  </script>
+</body>
+</html>

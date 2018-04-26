@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="js/phaser.min.js"></script>
+  <script src="js/datgui.js"></script>
+</head>
+<body>
+  <script>
+    let config = {
+      type: Phaser.AUTO,
+      width: 800,
+      height: 600,
+      scene: {
+        preload,
+        create
+      }
+    }
+
+    let game= new Phaser.Game(config)
+
+    function preload()
+    {
+      this.load.image("sky","./assets/sky.png")
+    }
+
+    function create()
+    {
+      let gui = new dat.GUI()
+
+      this.add.image(400,300,"sky")
+
+      let camera1 = this.cameras.add(0,0,400,300).setZoom(0.5)
+
+      gui.addFolder("Camera1")
+      gui.add(camera1,'x')
+      gui.add(camera1,'y')
+      gui.add(camera1,'width')
+      gui.add(camera1,'height')
+      gui.add(camera1, 'centerToSize');
+      gui.add(camera1, 'scrollX', -1920, 1920);
+      gui.add(camera1, 'scrollY', -989, 989);
+      gui.add(camera1, 'zoom', 0.1, 2).step(0.1);
+      gui.add(camera1, 'rotation').step(0.01);
+      gui.addColor(camera1, 'backgroundColor').onChange(function (value) {
+        value.a = 255;
+        camera1.setBackgroundColor(value);
+      });
+    }
+  </script>
+</body>
+</html>

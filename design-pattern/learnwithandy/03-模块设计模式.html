@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var myModule = {
+      macCode : "qn28dhb58xk",
+
+      myConfig : {
+        cache : true,
+        language : 'zh-cn'
+      },
+
+      printMacCode : function(){
+        console.log("my mac code is"+this.macCode)
+      },
+
+      printConfig : function(){
+        console.log("your cache is "+ (this.myConfig.cache?"enabled":"disabled"))
+      },
+
+      updateConfig : function(config){
+        if(typeof config === 'object'){
+          this.myConfig = config
+        }
+      }
+
+    }
+
+    myModule.printMacCode()
+    myModule.printConfig()
+    myModule.updateConfig({
+      cache : false,
+      language : 'kr'
+    })
+    myModule.printConfig()
+  </script>
+</body>
+</html>

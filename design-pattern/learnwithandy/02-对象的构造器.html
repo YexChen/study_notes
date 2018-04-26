@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //使用构造函数
+    function Car(brand,miles,year){
+      this.brand = brand
+      this.miles = miles
+      this.year = year
+
+      this.print = function(){
+        console.log(this)
+        return this.brand + "has done" + this.miles + "miles"
+      }
+    }
+
+    a = new Car("benz",100000,1996)
+    b = new Car("zhonghua",80000,1998)
+
+    console.log(a.print())
+    console.log(b.print())
+
+    //上面这种方法不是最佳设计,每次car实例化的时候都会创造一个方法
+    //最好的设计方式是在原型上顶一个个函数
+    function Food(name,expire){
+      this.name = name
+      this.expire = expire
+    }
+
+    Food.prototype.showMessage = function(){
+      return this.name + " has" + this.expire + " days to expire"
+    }
+
+    hotdog = new Food("hotdog",1)
+    noodles = new Food("noodles",10)
+
+    console.log(hotdog.showMessage())
+    console.log(noodles.showMessage())
+
+  </script>
+</body>
+</html>

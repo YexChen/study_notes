@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+  <div id = "app">
+    <p>original message : {{message}}</p>
+    <p>reversedMessage : {{reversedMessage}}</p>
+    <p>单价A: <input type="text" v-model = "priceA">,数量A: <input type="text" v-model = "numberA"></p>
+    <p>单价B： <input type="text" v-model = "priceB">,数量B: <input type="text" v-model = "numberB"></p>
+    <p>总价：{{summary}}</p>
+  </div>
+  <script>
+    const vm = new Vue({
+      el : "#app",
+      data : {
+        message : "鬼人正邪",
+        priceA : 0,
+        priceB : 0,
+        numberA: 0,
+        numberB: 0
+      },
+      computed : {
+        reversedMessage  : function(){
+          return  this.message.split("").reverse().join("")
+        },
+        summary : function(){
+          return this.priceA * this.numberA + this.priceB * this.numberB
+        }
+      }
+    })
+  </script>
+</body>
+</html>
